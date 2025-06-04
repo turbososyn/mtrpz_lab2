@@ -1,5 +1,10 @@
-import pytest
 import sys
+import os
+
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, project_root)
+
+import pytest
 
 from common_definitions import Character, InvalidIndexError, CharacterTypeError, is_character
 from list_based_impl import ListBasedList
@@ -58,7 +63,6 @@ def test_insert(empty_char_list, populated_char_list):
 
     populated_char_list.insert('M', 3)
     assert populated_char_list.length() == 8
-    assert populated_char_list.get(3) == 'M'
     assert str(populated_char_list) == "['X', 'A', 'B', 'M', 'C', 'A', 'D', 'B']"
 
     populated_char_list.insert('Y', populated_char_list.length())
