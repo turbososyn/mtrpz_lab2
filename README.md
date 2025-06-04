@@ -37,4 +37,4 @@ Both implementations (`ListBasedList` and `DoublyLinkedList`) are designed to pr
     Pytest will discover and run all tests defined in the `tests/` directory for both list implementations. A successful run will show green indicators for all collected tests.
 
 ## Link to Commit Where Tests Failed on CI
-Failed CI tests commit: [`b1b0690`](https://github.com/turbososyn/quadratic_solver/commit/e1337d5a4da898348fc46816378378b38c811b2f)
+Failed CI tests commit: [`b1b0690`](https://github.com/turbososyn/mtrpz_lab2/commit/e1337d5a4da898348fc46816378378b38c811b2f)
