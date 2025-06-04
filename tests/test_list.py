@@ -35,6 +35,11 @@ def test_append(empty_char_list):
         empty_char_list.append(123)
 
 def test_insert(empty_char_list, populated_char_list):
+    with pytest.raises(InvalidIndexError):
+        empty_char_list.insert('A', -1)
+    with pytest.raises(InvalidIndexError):
+        empty_char_list.insert('A', 1)
+
     empty_char_list.insert('Z', 0)
     assert empty_char_list.length() == 1
     assert empty_char_list.get(0) == 'Z'
@@ -44,11 +49,7 @@ def test_insert(empty_char_list, populated_char_list):
     assert empty_char_list.get(1) == 'W'
     assert str(empty_char_list) == "['Z', 'W']"
 
-    with pytest.raises(InvalidIndexError):
-        empty_char_list.insert('A', -1)
-
-    with pytest.raises(InvalidIndexError):
-         empty_char_list.insert('A', 1)
+    original_populated_str = str(populated_char_list)
 
     populated_char_list.insert('X', 0)
     assert populated_char_list.length() == 7
@@ -195,7 +196,6 @@ def test_reverse(populated_char_list):
     assert single_list.length() == 1
     assert str(single_list) == "['Z']"
 
-
 def test_findFirst(populated_char_list):
     assert populated_char_list.findFirst('A') == 0
     assert populated_char_list.findFirst('B') == 1
@@ -208,7 +208,6 @@ def test_findFirst(populated_char_list):
 
     assert populated_char_list.findFirst(123) == -1
 
-
 def test_findLast(populated_char_list):
     assert populated_char_list.findLast('A') == 3
     assert populated_char_list.findLast('B') == 5
@@ -220,7 +219,6 @@ def test_findLast(populated_char_list):
     assert empty_list.findLast('A') == -1
 
     assert populated_char_list.findLast(123) == -1
-
 
 def test_clear(populated_char_list):
     populated_char_list.clear()
