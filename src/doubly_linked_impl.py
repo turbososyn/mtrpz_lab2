@@ -4,6 +4,8 @@ class CharacterTypeError(Exception): pass
 def is_character(element) -> bool:
     return isinstance(element, str) and len(element) == 1
 
+import sys
+
 class Node:
     def __init__(self, data: Character = None, next_node: 'Node' = None, prev_node: 'Node' = None):
         if data is not None and not is_character(data):
@@ -114,6 +116,7 @@ class DoublyLinkedList:
 
     def deleteAll(self, element: Character) -> None:
         if not is_character(element):
+             print(f"Warning: deleteAll received non-character element '{element}'. No elements will be deleted.", file=sys.stderr)
              return
         current = self._head
         while current:
@@ -163,6 +166,7 @@ class DoublyLinkedList:
 
     def findFirst(self, element: Character) -> int:
         if not is_character(element):
+             print(f"Warning: findFirst received non-character element '{element}'. Returning -1.", file=sys.stderr)
              return -1
         current = self._head
         index = 0
@@ -175,6 +179,7 @@ class DoublyLinkedList:
 
     def findLast(self, element: Character) -> int:
         if not is_character(element):
+             print(f"Warning: findLast received non-character element '{element}'. Returning -1.", file=sys.stderr)
              return -1
         current = self._tail
         index = self._length - 1
