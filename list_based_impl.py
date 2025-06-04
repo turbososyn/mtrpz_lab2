@@ -1,13 +1,5 @@
-Character = str
-
-class InvalidIndexError(Exception):
-    pass
-
-class CharacterTypeError(Exception):
-    pass
-
-def is_character(element) -> bool:
-    return isinstance(element, str) and len(element) == 1
+from common_definitions import Character, InvalidIndexError, CharacterTypeError, is_character
+import sys
 
 class ListBasedList:
     def __init__(self, initial_data=None):
@@ -17,7 +9,7 @@ class ListBasedList:
                 if is_character(item):
                     self._data.append(item)
                 else:
-                     raise CharacterTypeError(f"Initial data must contain only characters. Found: {item}")
+                    raise CharacterTypeError(f"Initial data must contain only characters. Found: {item}")
 
     def __str__(self) -> str:
         return f"[{', '.join(repr(item) for item in self._data)}]"
@@ -47,6 +39,7 @@ class ListBasedList:
 
     def deleteAll(self, element: Character) -> None:
         if not is_character(element):
+             print(f"Warning: deleteAll received non-character element '{element}'. No elements will be deleted.", file=sys.stderr)
              return
         self._data = [item for item in self._data if item != element]
 
@@ -63,6 +56,7 @@ class ListBasedList:
 
     def findFirst(self, element: Character) -> int:
         if not is_character(element):
+             print(f"Warning: findFirst received non-character element '{element}'. Returning -1.", file=sys.stderr)
              return -1
         try:
             return self._data.index(element)
@@ -71,6 +65,7 @@ class ListBasedList:
 
     def findLast(self, element: Character) -> int:
         if not is_character(element):
+             print(f"Warning: findLast received non-character element '{element}'. Returning -1.", file=sys.stderr)
              return -1
         for i in range(self.length() - 1, -1, -1):
             if self._data[i] == element:

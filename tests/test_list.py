@@ -63,6 +63,7 @@ def test_insert(empty_char_list, populated_char_list):
 
     populated_char_list.insert('M', 3)
     assert populated_char_list.length() == 8
+    assert populated_char_list.get(3) == 'M'
     assert str(populated_char_list) == "['X', 'A', 'B', 'M', 'C', 'A', 'D', 'B']"
 
     populated_char_list.insert('Y', populated_char_list.length())
@@ -250,7 +251,7 @@ def test_extend(populated_char_list):
 
     empty_other_list = populated_char_list.__class__()
     populated_char_list.extend(empty_other_list)
-    assert empty_other_list.length() == 0
+    assert populated_char_list.length() == 9
     assert str(populated_char_list) == "['A', 'B', 'C', 'A', 'D', 'B', 'X', 'Y', 'Z']"
 
     empty_list = populated_char_list.__class__()

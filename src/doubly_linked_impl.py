@@ -1,11 +1,5 @@
-Character = str
-class InvalidIndexError(Exception): pass
-class CharacterTypeError(Exception): pass
-def is_character(element) -> bool:
-    return isinstance(element, str) and len(element) == 1
-
+from common_definitions import Character, InvalidIndexError, CharacterTypeError, is_character
 import sys
-
 class Node:
     def __init__(self, data: Character = None, next_node: 'Node' = None, prev_node: 'Node' = None):
         if data is not None and not is_character(data):
@@ -55,7 +49,7 @@ class DoublyLinkedList:
 
     def _get_node_at_index(self, index: int) -> Node:
          if not (0 <= index < self._length):
-              raise InvalidIndexError(f"Internal Error: Node index {index} out of bounds (0 to {self._length - 1})")
+             raise InvalidIndexError(f"Index {index} is out of bounds (0 to {self._length - 1})")
          if index < self._length // 2:
              current = self._head
              for _ in range(index):
@@ -91,8 +85,8 @@ class DoublyLinkedList:
             self._length += 1
 
     def delete(self, index: int) -> Character:
-        if not (0 <= index < self.length()):
-            raise InvalidIndexError(f"Index {index} is out of bounds for deletion (0 to {self.length() - 1})")
+        if not (0 <= index < self._length):
+            raise InvalidIndexError(f"Index {index} is out of bounds for deletion (0 to {self._length - 1})")
         node_to_delete = self._get_node_at_index(index)
         data = node_to_delete.data
         prev_node = node_to_delete.prev
@@ -120,7 +114,6 @@ class DoublyLinkedList:
              return
         current = self._head
         while current:
-            next_item = current.next
             if current.data == element:
                 prev_node = current.prev
                 next_node = current.next
@@ -133,10 +126,13 @@ class DoublyLinkedList:
                 else:
                     self._tail = prev_node
                 self._length -= 1
+                next_current = next_node
                 current.next = None
                 current.prev = None
                 current.data = None
-            current = next_item
+                current = next_current
+            else:
+                current = current.next
         if self._length == 0:
              self._head = None
              self._tail = None
